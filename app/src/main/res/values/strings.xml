@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Kuvarica</string>
+    <string name="instructions_hint"> <font size = "13" >Write Your Recipe Instructions Here! </font></string>
 </resources>
