@@ -1,8 +1,8 @@
 package com.example.rza.kuvarica;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +21,6 @@ public class AddNewRecipeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_recipe);
-        ;
 
         etRecipeInstructions = (EditText) findViewById(R.id.et_recipe_instructions);
         etRecipeName = (EditText) findViewById(R.id.et_recipe_name);
@@ -31,8 +30,9 @@ public class AddNewRecipeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String recipeName = etRecipeName.getText().toString();
-                String recipeInstructions = etRecipeInstructions.getText().toString() + "\n";
+                String recipeInstructions = etRecipeInstructions.getText().toString();
                 String txtEntry = recipeName + ", " + recipeInstructions + "#";
+
                 File file = getFileStreamPath("recipes.txt");
 
                 if (!file.exists()) {
@@ -46,6 +46,7 @@ public class AddNewRecipeActivity extends AppCompatActivity {
                 }
                 else {
                     writeNewEntry(file, txtEntry);
+                    Log.d("Info", txtEntry);
                 }
                 Toast.makeText(AddNewRecipeActivity.this, "Recipe added", Toast.LENGTH_LONG).show();
                 etRecipeInstructions.setText("");

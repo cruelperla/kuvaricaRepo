@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,10 +54,11 @@ public class MainActivity extends AppCompatActivity {
                 br.close();
                 String recipeWholeString = text.toString();
 
-                int size = recipeWholeString.split("#").length;
-                for (int i = 0; i < size - 1; i++) {
-                    String recipe = recipeWholeString.split("#")[0];
-                    String recipeName = recipe.split(",")[i];
+                int numberOfRecipes = recipeWholeString.split("#").length;
+                Log.d("Info", recipeWholeString);
+                for (int i = 0; i < numberOfRecipes - 1; i++ ){
+                    String recipe = recipeWholeString.split("#")[i];
+                    String recipeName = recipe.split(",")[0];
                     names.add(recipeName);
                 }
             }
