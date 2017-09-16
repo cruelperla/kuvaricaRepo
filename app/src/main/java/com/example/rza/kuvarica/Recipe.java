@@ -8,6 +8,15 @@ public class Recipe {
     String name;
     String content;
 
+    public Recipe(){
+
+    }
+
+    public Recipe(String name, String content) {
+        this.name = name;
+        this.content = content;
+    }
+
     public String getName() {
         return name;
     }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="150dp">
+
+    <TextView
+        android:textSize="20sp"
+        android:text="@string/sms_dialog"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/et_sms_number"
+        android:text="+381"
+        android:textAlignment="center"
+        android:textSize="13sp"
+        android:hint="phone number"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_sms"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:text="send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

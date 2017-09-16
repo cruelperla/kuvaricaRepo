@@ -17,29 +17,40 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class RecipeListActivity extends AppCompatActivity {
     private ListView listView;
     private FloatingActionButton fab;
-
+    private static String TAG = "LOG";
+    private ArrayList<Recipe> recipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList<String> recipes = new ArrayList<>();
-        ArrayList<String> names = new ArrayList<>();
+        recipes = new ArrayList<>();
         listView = (ListView) findViewById(R.id.lv_content);
         fab = (FloatingActionButton) findViewById(R.id.fab_add_new_recipe);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, AddNewRecipeActivity.class);
+                Intent i = new Intent(RecipeListActivity.this, AddNewRecipeActivity.class);
                 startActivity(i);
             }
         });
 
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: resumed");
+        recipes.clear();
+        populateListView();
+    }
+
+    public void populateListView() {
         StringBuilder text = new StringBuilder();
         try {
 
@@ -55,36 +66,38 @@ public class MainActivity extends AppCompatActivity {
                 String recipeWholeString = text.toString();
 
                 int numberOfRecipes = recipeWholeString.split("#").length;
-                Log.d("Info", recipeWholeString);
+                Log.d("whole recipe", recipeWholeString);
                 for (int i = 0; i < numberOfRecipes - 1; i++ ){
                     String recipe = recipeWholeString.split("#")[i];
                     String recipeName = recipe.split(",")[0];
-                    names.add(recipeName);
+                    String recipeContent = recipe.split(",")[1];
+                    Recipe r = new Recipe(recipeName, recipeContent);
+                    recipes.add(r);
                 }
             }
             else {
-                Toast.makeText(MainActivity.this, "There Are No Recipes :(", Toast.LENGTH_LONG).show();
+                Toast.makeText(RecipeListActivity.this, "There Are No Recipes :(", Toast.LENGTH_LONG).show();
             }
 
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
-
-        recipes.addAll(names);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, recipes);
+        ArrayList<String> recipeNames = new ArrayList<>();
+        for (int i = 0; i < recipes.size(); i++) {
+            recipeNames.add(recipes.get(i).getName());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(RecipeListActivity.this, android.R.layout.simple_list_item_1, recipeNames);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this, "View " + String.valueOf(i) + " clicked", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(RecipeListActivity.this, RecipeDetailActivity.class);
+                intent.putExtra("recipeName", recipes.get(i).getName());
+                intent.putExtra("recipeContent", recipes.get(i).getContent());
+                startActivity(intent);
             }
         });
-
     }
 }
