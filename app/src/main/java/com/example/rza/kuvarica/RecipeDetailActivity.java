@@ -2,15 +2,18 @@ package com.example.rza.kuvarica;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RecipeDetailActivity extends AppCompatActivity {
     private String recipeName;
@@ -33,14 +36,14 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipeContent = i.getStringExtra("recipeContent");
         recipeName = i.getStringExtra("recipeName");
 
-
+        textViewName.setTypeface(null, Typeface.BOLD);
         textViewContent.setText(recipeContent);
         textViewName.setText(recipeName);
 
         fabSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String smsBody = recipeName + "\n" + recipeContent;
+                final String smsBody = recipeName + ":\n Instructions: " + recipeContent;
                 final Dialog d = new Dialog(RecipeDetailActivity.this);
                 d.setContentView(R.layout.sms_layout_dialog);
                 final EditText etSms = (EditText)d.findViewById(R.id.et_sms_number);
@@ -52,8 +55,14 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         SmsManager sms = SmsManager.getDefault();
                         String number = etSms.getText().toString();
-                        sms.sendTextMessage(number, null, smsBody, null, null);
-                        d.cancel();
+                        if (!number.equals("+381")) {
+                            sms.sendTextMessage(number, null, smsBody, null, null);
+                            Toast.makeText(RecipeDetailActivity.this, "SMS Sent to: " + number, Toast.LENGTH_SHORT).show();
+                            d.cancel();
+                        }
+                        else {
+                            Toast.makeText(RecipeDetailActivity.this, "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }
@@ -62,11 +71,34 @@ public class RecipeDetailActivity extends AppCompatActivity {
         fabEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_SUBJECT, recipeName);
-                intent.putExtra(Intent.EXTRA_TEXT, recipeContent);
-                startActivity(Intent.createChooser(intent, "Send Email"));
+                final Dialog d = new Dialog(RecipeDetailActivity.this);
+
+                d.setContentView(R.layout.email_layout_dialog);
+                Button btnSendEmail = (Button)d.findViewById(R.id.btn_email);
+                final EditText etEmail = (EditText)d.findViewById(R.id.et_email_dialog);
+                d.show();
+
+                btnSendEmail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String emailAddress = etEmail.getText().toString();
+                        if (!emailAddress.equals("")) {
+                        Log.d("INFO", emailAddress);
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", emailAddress, null));
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, recipeContent);
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, recipeName);
+                        startActivity(Intent.createChooser(emailIntent, "Send email..."));
+                        d.cancel();
+                        }
+                        else {
+                            Toast.makeText(RecipeDetailActivity.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+
+
             }
         });
 

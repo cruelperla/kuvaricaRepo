@@ -5,25 +5,25 @@
 
     <TextView
         android:textSize="20sp"
-        android:text="@string/sms_dialog"
+        android:text="@string/email_dialog"
         android:textAlignment="center"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/et_sms_number"
-        android:text="+381"
+        android:id="@+id/et_email_dialog"
         android:textAlignment="center"
         android:textSize="13sp"
-        android:hint="phone number"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btn_sms"
+        android:id="@+id/btn_email"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:text="send"

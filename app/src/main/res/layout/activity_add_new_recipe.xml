@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.rza.kuvarica.AddNewRecipeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
 
     <TextView
         android:layout_width="match_parent"
@@ -30,6 +36,7 @@
 
         <EditText
             android:id="@+id/et_recipe_name"
+            android:inputType="textCapWords"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -51,20 +58,23 @@
         <EditText
             android:id="@+id/et_recipe_instructions"
             android:gravity="top"
-            style="@style/Widget.AppCompat.EditText"
-            android:inputType="textMultiLine"
+            android:textSize="14sp"
+            android:inputType="textMultiLine|textCapSentences"
             android:layout_width="match_parent"
             android:hint="@string/instructions_hint"
             android:layout_height="100dp" />
     </LinearLayout>
 
+    </LinearLayout>
+
     <Button
         android:id="@+id/btn_add"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="30dp"
         android:text="add"
         android:layout_marginTop="150dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-
-</LinearLayout>
+</RelativeLayout>

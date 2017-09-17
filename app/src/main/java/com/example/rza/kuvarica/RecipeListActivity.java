@@ -40,8 +40,6 @@ public class RecipeListActivity extends AppCompatActivity {
         });
 
     }
-
-
     @Override
     protected void onResume() {
         super.onResume();
