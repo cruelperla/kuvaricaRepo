@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <TextView
-        android:text="List of All Recipes"
+        android:text="@string/pera"
         android:textColor="@color/colorAccent"
         android:textAlignment="center"
         android:layout_marginTop="20dp"

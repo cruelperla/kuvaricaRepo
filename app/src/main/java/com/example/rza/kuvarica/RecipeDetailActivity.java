@@ -22,6 +22,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private TextView textViewContent;
     private FloatingActionButton fabSms;
     private FloatingActionButton fabEmail;
+    private static String TAG = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

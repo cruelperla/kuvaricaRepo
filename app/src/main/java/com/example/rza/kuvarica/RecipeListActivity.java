@@ -26,16 +26,15 @@ public class RecipeListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list);
 
         recipes = new ArrayList<>();
         listView = (ListView) findViewById(R.id.lv_content);
         fab = (FloatingActionButton) findViewById(R.id.fab_add_new_recipe); //view injection, omogucava da *fab* koristis kao promenljivu
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent i = new Intent(RecipeListActivity.this, AddNewRecipeActivity.class);
+            public void onClick(View view) { //klik na plusic u donjem desnom uglu
+                Intent i = new Intent(RecipeListActivity.this, AddNewRecipeActivity.class); //this - iz ovog activitia, class - u ovaj activity
                 startActivity(i);
             }
         });
@@ -92,7 +91,7 @@ public class RecipeListActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) { //otvaranje novog activitia za detalje recepta
                 Intent intent = new Intent(RecipeListActivity.this, RecipeDetailActivity.class);
                 intent.putExtra("recipeName", recipes.get(i).getName());
                 intent.putExtra("recipeContent", recipes.get(i).getContent());
