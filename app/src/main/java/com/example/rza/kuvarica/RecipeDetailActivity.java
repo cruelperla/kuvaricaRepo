@@ -53,7 +53,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                 btnSendSms.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        SmsManager sms = SmsManager.getDefault();
+                        SmsManager sms = SmsManager.getDefault(); //deklarises SmsManager
                         String number = etSms.getText().toString();
                         if (!number.equals("+381")) {
                             sms.sendTextMessage(number, null, smsBody, null, null);
@@ -71,9 +71,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
         fabEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog d = new Dialog(RecipeDetailActivity.this);
+                final Dialog d = new Dialog(RecipeDetailActivity.this); //inicijalizacija dialoga
 
-                d.setContentView(R.layout.email_layout_dialog);
+                d.setContentView(R.layout.email_layout_dialog); //izgled dialog
                 Button btnSendEmail = (Button)d.findViewById(R.id.btn_email);
                 final EditText etEmail = (EditText)d.findViewById(R.id.et_email_dialog);
                 d.show();
@@ -83,11 +83,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         String emailAddress = etEmail.getText().toString();
                         if (!emailAddress.equals("")) {
-                        Log.d("INFO", emailAddress);
-                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", emailAddress, null));
-                        emailIntent.putExtra(Intent.EXTRA_TEXT, recipeContent);
-                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, recipeName);
-                        startActivity(Intent.createChooser(emailIntent, "Send email..."));
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", emailAddress, null)); //intent koji se korist za slanje mejla
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, recipeContent); //body tog maila
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, recipeName); //subject maila
+                        startActivity(Intent.createChooser(emailIntent, ""));
                         d.cancel();
                         }
                         else {
@@ -95,9 +94,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
-
 
             }
         });

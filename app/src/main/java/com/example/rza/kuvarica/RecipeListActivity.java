@@ -30,7 +30,8 @@ public class RecipeListActivity extends AppCompatActivity {
 
         recipes = new ArrayList<>();
         listView = (ListView) findViewById(R.id.lv_content);
-        fab = (FloatingActionButton) findViewById(R.id.fab_add_new_recipe);
+        fab = (FloatingActionButton) findViewById(R.id.fab_add_new_recipe); //view injection, omogucava da *fab* koristis kao promenljivu
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +41,7 @@ public class RecipeListActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -48,7 +50,7 @@ public class RecipeListActivity extends AppCompatActivity {
         populateListView();
     }
 
-    public void populateListView() {
+    public void populateListView() { //popunjava list view sa podacima
         StringBuilder text = new StringBuilder();
         try {
 
@@ -85,7 +87,7 @@ public class RecipeListActivity extends AppCompatActivity {
         for (int i = 0; i < recipes.size(); i++) {
             recipeNames.add(recipes.get(i).getName());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(RecipeListActivity.this, android.R.layout.simple_list_item_1, recipeNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(RecipeListActivity.this, android.R.layout.simple_list_item_1, recipeNames); //recipeNames je arraylista imena
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -98,4 +100,5 @@ public class RecipeListActivity extends AppCompatActivity {
             }
         });
     }
+
 }
