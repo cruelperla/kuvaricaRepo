@@ -82,7 +82,7 @@ public class RecipeListActivity extends AppCompatActivity {
         catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<String> recipeNames = new ArrayList<>();
+        ArrayList<String> recipeNames = new ArrayList<>(); //popunjava arraylist za nazivima
         for (int i = 0; i < recipes.size(); i++) {
             recipeNames.add(recipes.get(i).getName());
         }

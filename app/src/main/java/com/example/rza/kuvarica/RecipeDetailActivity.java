@@ -41,7 +41,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         textViewContent.setText(recipeContent);
         textViewName.setText(recipeName);
 
-        fabSms.setOnClickListener(new View.OnClickListener() {
+        fabSms.setOnClickListener(new View.OnClickListener() { //kad se klikne na sms fab
             @Override
             public void onClick(View view) {
                 final String smsBody = recipeName + ":\n Instructions: " + recipeContent;
@@ -71,7 +71,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         fabEmail.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { //email floating action button
                 final Dialog d = new Dialog(RecipeDetailActivity.this); //inicijalizacija dialoga
 
                 d.setContentView(R.layout.email_layout_dialog); //izgled dialog
@@ -106,6 +106,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed(); //obrises ovu liniju koda i tako osposobis back
+        super.onBackPressed();
     }
 }

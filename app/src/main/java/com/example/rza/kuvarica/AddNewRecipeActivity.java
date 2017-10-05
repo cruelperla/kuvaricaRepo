@@ -28,7 +28,7 @@ public class AddNewRecipeActivity extends AppCompatActivity {
 
         btnAddRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { //dugme za dodavanje novog recepta
                 String recipeName = etRecipeName.getText().toString();
                 String recipeInstructions = etRecipeInstructions.getText().toString();
                 if (recipeName.equals("") || recipeInstructions.equals("")) {
