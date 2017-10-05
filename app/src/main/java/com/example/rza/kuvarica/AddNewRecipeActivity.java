@@ -31,26 +31,33 @@ public class AddNewRecipeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String recipeName = etRecipeName.getText().toString();
                 String recipeInstructions = etRecipeInstructions.getText().toString();
-                String txtEntry = recipeName + ", " + recipeInstructions + "#";
-
-                File file = getFileStreamPath("recipes.txt");
-
-                if (!file.exists()) {
-                    try {
-                        file.createNewFile();
-                    }
-                    catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    writeNewEntry(file, txtEntry);
+                if (recipeName.equals("") || recipeInstructions.equals("")) {
+                    Toast.makeText(AddNewRecipeActivity.this, "Please fill all necessary fields!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    writeNewEntry(file, txtEntry);
-                    Log.d("Info", txtEntry);
+                    String txtEntry = recipeName + ", " + recipeInstructions + "#";
+
+                    File file = getFileStreamPath("recipes.txt");
+
+                    if (!file.exists()) {
+                        try {
+                            file.createNewFile();
+                        }
+                        catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        writeNewEntry(file, txtEntry);
+                    }
+                    else {
+                        writeNewEntry(file, txtEntry);
+                        Log.d("Info", txtEntry);
+                    }
+                    Toast.makeText(AddNewRecipeActivity.this, "Recipe added", Toast.LENGTH_LONG).show();
+                    etRecipeInstructions.setText("");
+                    etRecipeName.setText("");
+
                 }
-                Toast.makeText(AddNewRecipeActivity.this, "Recipe added", Toast.LENGTH_LONG).show();
-                etRecipeInstructions.setText("");
-                etRecipeName.setText("");
+
             }
         });
     }

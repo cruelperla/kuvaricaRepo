@@ -53,7 +53,7 @@ public class RecipeListActivity extends AppCompatActivity {
         StringBuilder text = new StringBuilder();
         try {
 
-            File file = getFileStreamPath("recipes.txt");
+            File file = getFileStreamPath("recipes.txt"); //txt fajl u kom se nalaze recepti
             if (file.exists()) {
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 String line;

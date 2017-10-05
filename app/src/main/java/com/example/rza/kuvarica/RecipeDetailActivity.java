@@ -100,5 +100,12 @@ public class RecipeDetailActivity extends AppCompatActivity {
         });
 
 
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed(); //obrises ovu liniju koda i tako osposobis back
     }
 }
